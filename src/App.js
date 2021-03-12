@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Person from './elements/Person';
+import Persons from './components/Person/Persons/Persons';
 import './App.css';
+import Cokcpit from './components/Cockpit/Cockpit';
 
 export default class App extends Component {
   state = {
@@ -64,17 +65,11 @@ export default class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map((person, index) => {
-            return (
-              <Person
-                name={person.name}
-                age={person.age}
-                click={() => this.deletePersonHandler(index)}
-                key={person.id}
-                changed={event => this.nameChangeHandler(event, person.id)}
-              />
-            );
-          })}
+          <Persons
+            persons={this.state.persons}
+            clicked={this.deletePersonHandler}
+            changed={this.nameChangeHandler}
+          />
         </div>
       );
       style.backgroundColor = 'red';
@@ -84,22 +79,12 @@ export default class App extends Component {
       };
     }
 
-    const clasess = [];
-    if (this.state.persons.length <= 2) {
-      clasess.push('red');
-    }
-
-    if (this.state.persons.length <= 1) {
-      clasess.push('bold');
-    }
-
     return (
       <div className="App">
-        <h1>Hello im react app</h1>
-        <p className={clasess.join(' ')}>its really working</p>
-        <button className="button" onClick={this.togglePersonssHandler}>
-          Toggle persons
-        </button>
+        <Cokcpit
+          persons={this.state.persons}
+          clicked={this.togglePersonssHandler}
+        />
         {persons}
       </div>
     );

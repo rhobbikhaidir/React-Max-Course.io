@@ -1,0 +1,30 @@
+.red {
+  color: red;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.button {
+  background-color: green;
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  margin-bottom: 15px;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.btn-red {
+  background-color: red;
+}
+
+.btn-b {
+  border: 3px solid black;
+  background-color: red;
+}
+.button:hover {
+  background-color: lightgreen;
+  color: black;
+}

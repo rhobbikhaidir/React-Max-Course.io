@@ -4,7 +4,7 @@ import './index.css';
 
 function index(props) {
   const style = {
-    '@media (min-width: 500px)': {
+    '@media (minWidth: 500px)': {
       width: '450px',
     },
   };

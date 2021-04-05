@@ -9,7 +9,7 @@ export default function Persons(props) {
         key={person.id}
         name={person.name}
         age={person.age}
-        changed={event => props.nameChangeHandler(event, person.id)}
+        changed={event => props.changed(event, person.id)}
       />
     );
   });

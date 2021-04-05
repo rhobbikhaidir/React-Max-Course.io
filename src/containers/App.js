@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Persons from './components/Person/Persons/Persons';
+import Persons from '../components/Person/Persons/Persons';
 import './App.css';
-import Cokcpit from './components/Cockpit/Cockpit';
+import Cokcpit from '../components/Cockpit/Cockpit';
 
 export default class App extends Component {
   state = {
     persons: [
-      { id: 'awks1', name: 'Rhoka', age: 23 },
+      { id: 'awks1', name: 'Rhoka', age: 20 },
       { id: 'awks2', name: 'Ainun', age: 21 },
       { id: 'awks3', name: 'Apri', age: 19 },
     ],
@@ -43,7 +43,10 @@ export default class App extends Component {
     });
   };
 
+  // nameChangeHandler()
+
   render() {
+    // this.nameChangeHandler();
     // console.log(this.state);
 
     const style = {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Persons from '../components/Person/Persons/Persons';
 import './App.css';
 import Cokcpit from '../components/Cockpit/Cockpit';
+import AuthContext from '../context/AuthContext';
 
 export default class App extends Component {
   state = {
@@ -11,6 +12,8 @@ export default class App extends Component {
       { id: 'awks3', name: 'Apri', age: 19 },
     ],
     showPersons: false,
+    changeCounter: 0,
+    isLogin: false,
   };
 
   nameChangeHandler = (event, id) => {
@@ -25,8 +28,11 @@ export default class App extends Component {
     person.name = event.target.value;
     const persons = [...this.state.persons];
     persons[personIndex] = person;
-    this.setState({
-      persons: persons,
+    this.setState((prevState, props) => {
+      return {
+        persons: persons,
+        changeCounter: prevState.changeCounter + 1,
+      };
     });
   };
 
@@ -43,9 +49,16 @@ export default class App extends Component {
     });
   };
 
+  loginHandler = () => {
+    this.setState({
+      isLogin: true,
+    });
+    console.log('succes');
+  };
   // nameChangeHandler()
 
   render() {
+    console.log(this.state.changeCounter);
     // this.nameChangeHandler();
     // console.log(this.state);
 
@@ -72,6 +85,7 @@ export default class App extends Component {
             persons={this.state.persons}
             clicked={this.deletePersonHandler}
             changed={this.nameChangeHandler}
+            isAuth={this.state.isLogin}
           />
         </div>
       );
@@ -81,14 +95,22 @@ export default class App extends Component {
         color: 'black',
       };
     }
-
+    console.log(this.props);
     return (
       <div className="App">
-        <Cokcpit
-          persons={this.state.persons}
-          clicked={this.togglePersonssHandler}
-        />
-        {persons}
+        <AuthContext.Provider
+          value={{
+            authenticated: this.state.isLogin,
+            login: this.loginHandler,
+          }}
+        >
+          <Cokcpit
+            persons={this.state.persons}
+            clicked={this.togglePersonssHandler}
+            login={this.loginHandler}
+          />
+          {persons}
+        </AuthContext.Provider>
       </div>
     );
   }

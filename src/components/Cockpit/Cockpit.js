@@ -1,8 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import './Cockpit.css';
+import AuthContext from '../../context/AuthContext';
 
 export default function Cockpit(props) {
   const [showCockpit, setShowCockpit] = useState(true);
+  const toggleBtnReff = useRef(null);
+  const authContext = useContext(AuthContext);
+  useEffect(() => {
+    toggleBtnReff.current.click();
+  }, []);
+
   const clasess = [];
   const backgroundToggle = [];
   if (props.persons.length <= 2) {
@@ -25,10 +32,14 @@ export default function Cockpit(props) {
           <h1>Hello im react app</h1>
           <p className={clasess.join(' ')}>its really working</p>
           <button
+            ref={toggleBtnReff}
             className={['button', backgroundToggle].join(' ')}
             onClick={props.clicked}
           >
             Toggle persons
+          </button>
+          <button onClick={authContext.login} className="button">
+            Login
           </button>
         </div>
       ) : (
